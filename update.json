@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "applicationId": "com.calisxtreme.app",
   "enabled": true,
-  "latestVersionCode": 15,
-  "latestVersionName": "2.0.1",
-  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.1/Calisxtreme-2.0.1-assinado.apk",
-  "apkSha256": "be90cc38d79f9c1fb3beec546e1e7d119de8bf73b04eb6f37f2213ccb961fc29",
-  "releaseNotes": "Atualização oficial do Calisxtreme 2.0.1. Firebase e perfil oficial preservados. Mantidos GPS, histórico local e metas. Teste da atualização pelo GitHub.",
-  "publishedAt": "2026-11-03T18:43:27Z"
+  "latestVersionCode": 16,
+  "latestVersionName": "2.0.2",
+  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.2/Calisxtreme-2.0.2-assinado.apk",
+  "apkSha256": "b3de58ff195da076c3c11311286af94dc56b12304ade081c6b74bcf36df64a25",
+  "releaseNotes": "Novo perfil com publicacoes.; Menu de tres pontos com configuracoes.; Sobre o criador: Denny Ximenes.; Melhorias de privacidade e seguranca.; GPS offline e Firebase preservados.; Atualizacao pelo GitHub.",
+  "publishedAt": "2026-11-03T19:33:26Z"
 }
