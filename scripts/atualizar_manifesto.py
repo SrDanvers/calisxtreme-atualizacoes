@@ -24,7 +24,8 @@ release = event.get('release')
 if release is None:
     release = github_json(f'https://api.github.com/repos/{REPO}/releases/latest')
 if release.get('draft') or release.get('prerelease'):
-    raise SystemExit('Release de testes ignorada (nao publica atualizacoes).')
+    print('Release de testes ignorada: update.json permanece inalterado.')
+    raise SystemExit(0)
 tag = release.get('tag_name', '')
 if not re.fullmatch(r'v\d+\.\d+\.\d+', tag):
     raise SystemExit('Use a tag v2.0.1, v2.0.2, etc.')
@@ -63,8 +64,11 @@ check = subprocess.run(['aapt','dump','badging','release_apk_tmp.apk'], capture_
 line = next((x for x in check.stdout.splitlines() if x.startswith('package: ')), '')
 pkg = re.search(r"name='([^']+)'", line)
 code = re.search(r"versionCode='(\d+)'", line)
+version_name = re.search(r"versionName='([^']+)'", line)
 if not pkg or pkg.group(1) != PKG or not code or int(code.group(1)) != version_code:
     raise SystemExit(f'Pacote ou versionCode errado: {line}')
+if not version_name or version_name.group(1) != tag.removeprefix('v'):
+    raise SystemExit(f'Versao do APK difere da tag {tag}: {line}')
 signed = subprocess.run(['apksigner','verify','--print-certs','release_apk_tmp.apk'],
                         check=True, capture_output=True, text=True)
 certificate = re.search(r'(?im)^Signer #1 certificate SHA-256 digest:\s*([a-f0-9]{64})\s*$', signed.stdout)
