@@ -1,0 +1,42 @@
+name: Calisxtreme - Publicar Atualizacao
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Preparar Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Instalar ferramentas para validar APK
+        shell: bash
+        run: |
+          sdkmanager 'build-tools;35.0.0'
+          echo "$ANDROID_HOME/build-tools/35.0.0" >> "$GITHUB_PATH"
+      - name: Verificar release e atualizar update.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+        run: python3 scripts/atualizar_manifesto.py
+      - name: Publicar manifesto
+        run: |
+          if git diff --quiet -- update.json; then
+            echo 'Nao ha atualizacao.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add update.json
+          git commit -m 'Calisxtreme: atualizar versao publicada'
+          git push origin HEAD:main
