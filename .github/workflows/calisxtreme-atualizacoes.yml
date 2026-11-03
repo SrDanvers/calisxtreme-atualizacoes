@@ -16,13 +16,30 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Preparar Android SDK
-        uses: android-actions/setup-android@v3
-      - name: Instalar ferramentas para validar APK
+      - name: Preparar ferramentas de validacao Android
         shell: bash
         run: |
-          sdkmanager 'build-tools;35.0.0'
-          echo "$ANDROID_HOME/build-tools/35.0.0" >> "$GITHUB_PATH"
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          TOOL_DIR=""
+          for candidate in "$SDK_ROOT"/build-tools/*; do
+            if [[ -x "$candidate/aapt" && -x "$candidate/apksigner" ]]; then
+              TOOL_DIR="$candidate"
+            fi
+          done
+          if [[ -z "$TOOL_DIR" ]]; then
+            SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -name sdkmanager -type f 2>/dev/null | head -n 1 || true)"
+            if [[ -z "$SDKMANAGER" ]]; then
+              echo "sdkmanager nao encontrado no runner" >&2
+              exit 1
+            fi
+            yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" 'build-tools;35.0.0' || true
+            TOOL_DIR="$SDK_ROOT/build-tools/35.0.0"
+          fi
+          test -x "$TOOL_DIR/aapt"
+          test -x "$TOOL_DIR/apksigner"
+          echo "$TOOL_DIR" >> "$GITHUB_PATH"
+          echo "Ferramentas Android encontradas: $TOOL_DIR"
       - name: Verificar release e atualizar update.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
