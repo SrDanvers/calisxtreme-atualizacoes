@@ -71,10 +71,37 @@ if not version_name or version_name.group(1) != tag.removeprefix('v'):
     raise SystemExit(f'Versao do APK difere da tag {tag}: {line}')
 signed = subprocess.run(['apksigner','verify','--print-certs','release_apk_tmp.apk'],
                         check=True, capture_output=True, text=True)
-certificate = re.search(r'(?im)^Signer #1 certificate SHA-256 digest:\s*([a-f0-9]{64})\s*$', signed.stdout)
 expected_cert = 'cab25fb0ab0a691371281cf9dc00b0e258a9336794f4ac797b08a33de7510000'
-if not certificate or certificate.group(1).lower() != expected_cert:
+# Versoes diferentes do apksigner podem formatar a saida com espacos e rotulos variados.
+# Exigimos o fingerprint SHA-256 do certificado explicitamente, nunca hash do arquivo ou chave publica.
+certificates = re.findall(r'(?im)^\\s*Signer\\s+#?\\d+\\s+certificate\\s+SHA-256\\s+digest:\\s*([a-f0-9]{64})\\s*
+Path('release_apk_tmp.apk').unlink(missing_ok=True)
+
+p = Path('update.json')
+manifest = json.loads(p.read_text(encoding='utf-8'))
+if manifest.get('applicationId') != PKG: raise SystemExit('Manifesto com pacote errado.')
+old_code = int(manifest.get('latestVersionCode', 0))
+if version_code <= old_code:
+    print('Versao antiga ou ja publicada: nenhuma alteracao.'); raise SystemExit(0)
+notes = [x[2:].strip() for x in body.splitlines() if x.lstrip().startswith('- ')]
+manifest.update({
+    'schemaVersion':1,
+    'applicationId':PKG,
+    'enabled':True,
+    'latestVersionCode':version_code,
+    'latestVersionName':tag.removeprefix('v'),
+    'apkUrl':asset['browser_download_url'],
+    'apkSha256':h.hexdigest(),
+    'releaseNotes':'; '.join(notes)[:800] or release.get('name') or tag,
+    'publishedAt':release.get('published_at') or ''})
+p.write_text(json.dumps(manifest, indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+print(f'Publicado {tag}; versionCode {version_code}; sha256 {h.hexdigest()}')
+, signed.stdout)
+if not certificates or any(c.lower() != expected_cert for c in certificates):
+    print('Certificados reportados pelo apksigner (publicos):')
+    print(signed.stdout[:4000])
     raise SystemExit('APK nao usa o certificado ORIGINAL do Calisxtreme; release bloqueada.')
+print('Certificado Calisxtreme validado pelo apksigner:', expected_cert)
 Path('release_apk_tmp.apk').unlink(missing_ok=True)
 
 p = Path('update.json')
