@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "applicationId": "com.calisxtreme.app",
-  "enabled": false,
-  "latestVersionCode": 0,
-  "latestVersionName": "",
-  "apkUrl": "",
-  "apkSha256": "",
-  "releaseNotes": "",
-  "publishedAt": ""
+  "enabled": true,
+  "latestVersionCode": 15,
+  "latestVersionName": "2.0.1",
+  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.1/Calisxtreme-2.0.1-assinado.apk",
+  "apkSha256": "be90cc38d79f9c1fb3beec546e1e7d119de8bf73b04eb6f37f2213ccb961fc29",
+  "releaseNotes": "Atualização oficial do Calisxtreme 2.0.1. Firebase e perfil oficial preservados. Mantidos GPS, histórico local e metas. Teste da atualização pelo GitHub.",
+  "publishedAt": "2026-11-03T18:43:27Z"
 }
