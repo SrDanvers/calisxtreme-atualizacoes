@@ -71,12 +71,16 @@ if not version_name or version_name.group(1) != tag.removeprefix('v'):
     raise SystemExit(f'Versao do APK difere da tag {tag}: {line}')
 signed = subprocess.run(['apksigner','verify','--print-certs','release_apk_tmp.apk'],
                         check=True, capture_output=True, text=True)
-print('Saida publica do apksigner:')
-print(signed.stdout)
-certificate = re.search(r'(?im)^Signer #1 certificate SHA-256 digest:\s*([a-f0-9]{64})\s*$', signed.stdout)
+certificates = []
+for cert_line in signed.stdout.splitlines():
+    marker = 'certificate SHA-256 digest:'
+    if marker in cert_line:
+        certificates.append(cert_line.split(marker, 1)[1].strip().lower())
 expected_cert = 'cab25fb0ab0a691371281cf9dc00b0e258a9336794f4ac797b08a33de7510000'
-if not certificate or certificate.group(1).lower() != expected_cert:
+if not certificates or any(cert != expected_cert for cert in certificates):
+    print('Certificados apresentados pelo apksigner:', certificates)
     raise SystemExit('APK nao usa o certificado ORIGINAL do Calisxtreme; release bloqueada.')
+print('Certificado original confirmado pelo apksigner.')
 Path('release_apk_tmp.apk').unlink(missing_ok=True)
 
 p = Path('update.json')
