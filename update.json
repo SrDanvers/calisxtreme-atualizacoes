@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "applicationId": "com.calisxtreme.app",
   "enabled": true,
-  "latestVersionCode": 20,
-  "latestVersionName": "2.0.6",
-  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/2.0.6/Calisxtreme-2.0.6-assinado.apk",
-  "apkSha256": "70651ec5cf4c628329bf2abe07f7c98e0f71de8fe17af83065be6408cb31979a",
-  "releaseNotes": "Nova tela inicial de desempenho.; Grafico de evolucao semanal.; Recordes pessoais.; Meta semanal interativa.; Calendario de corridas.; Resumo mensal.; Novo sistema de atualizacao obrigatoria.; GPS, Firebase e historico preservados.",
-  "publishedAt": "2026-11-04T13:45:03Z"
+  "latestVersionCode": 21,
+  "latestVersionName": "2.0.7",
+  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.7/Calisxtreme-2.0.7-assinado.apk",
+  "apkSha256": "986616398d1bd5315b62a94b586137e8ac57c61ce23a1d767d8a736a60cd094b",
+  "releaseNotes": "Nova interface para criar publicacoes.; Publicacoes com fotos.; Contador de caracteres.; Rascunhos salvos no celular.; Privacidade: publico ou so seguidores.; Publicacao de corridas do historico.; Novo visual das publicacoes.; Edicao e exclusao de publicacoes.; GPS, Firebase e historico preservados.",
+  "publishedAt": "2026-11-04T15:03:48Z"
 }
