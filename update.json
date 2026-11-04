@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "applicationId": "com.calisxtreme.app",
   "enabled": true,
-  "latestVersionCode": 18,
-  "latestVersionName": "2.0.4",
-  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.4/Calisxtreme-2.0.4-assinado.apk",
-  "apkSha256": "9d49d37297150764955d8eb3cf5e3385f62f9449cf7e1d8a940cae0dde9171b5",
-  "releaseNotes": "Novos cartões PNG com fundo transparente.; Cinco modelos de compartilhamento:; Compartilhamento aprimorado para Instagram, WhatsApp e apps compatíveis.; Suporte a imagem transparente para sobrepor em fotos e stories.; Melhorias na geração do trajeto GPS.; Histórico, Firebase e atualizações automáticas preservados.; Evolução do sistema social e esportivo do Calisxtreme.",
-  "publishedAt": "2026-11-04T02:58:21Z"
+  "latestVersionCode": 19,
+  "latestVersionName": "2.0.5",
+  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.5/Calisxtreme-2.0.5-assinado.apk",
+  "apkSha256": "259c2b48b403c3a7b2d0eb45d73f767d18b4375eb6678ac214e847cdea980b9c",
+  "releaseNotes": "Novo mapa interativo com ruas e GPS.; Publicação de corridas diretamente no perfil.; Compartilhamento de caminhadas e pedaladas.; Publicação de atividades do histórico.; Estatísticas de distância, tempo e ritmo.; Privacidade dos trajetos.; Firebase e histórico offline preservados.",
+  "publishedAt": "2026-11-04T03:40:52Z"
 }
