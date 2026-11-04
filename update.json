@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "applicationId": "com.calisxtreme.app",
   "enabled": true,
-  "latestVersionCode": 19,
-  "latestVersionName": "2.0.5",
-  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/v2.0.5/Calisxtreme-2.0.5-assinado.apk",
-  "apkSha256": "259c2b48b403c3a7b2d0eb45d73f767d18b4375eb6678ac214e847cdea980b9c",
-  "releaseNotes": "Novo mapa interativo com ruas e GPS.; Publicação de corridas diretamente no perfil.; Compartilhamento de caminhadas e pedaladas.; Publicação de atividades do histórico.; Estatísticas de distância, tempo e ritmo.; Privacidade dos trajetos.; Firebase e histórico offline preservados.",
-  "publishedAt": "2026-11-04T03:40:52Z"
+  "latestVersionCode": 20,
+  "latestVersionName": "2.0.6",
+  "apkUrl": "https://github.com/SrDanvers/calisxtreme-atualizacoes/releases/download/2.0.6/Calisxtreme-2.0.6-assinado.apk",
+  "apkSha256": "70651ec5cf4c628329bf2abe07f7c98e0f71de8fe17af83065be6408cb31979a",
+  "releaseNotes": "Nova tela inicial de desempenho.; Grafico de evolucao semanal.; Recordes pessoais.; Meta semanal interativa.; Calendario de corridas.; Resumo mensal.; Novo sistema de atualizacao obrigatoria.; GPS, Firebase e historico preservados.",
+  "publishedAt": "2026-11-04T13:45:03Z"
 }
