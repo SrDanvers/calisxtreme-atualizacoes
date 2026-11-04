@@ -27,8 +27,8 @@ if release.get('draft') or release.get('prerelease'):
     print('Release de testes ignorada: update.json permanece inalterado.')
     raise SystemExit(0)
 tag = release.get('tag_name', '')
-if not re.fullmatch(r'v\d+\.\d+\.\d+', tag):
-    raise SystemExit('Use a tag v2.0.1, v2.0.2, etc.')
+if not re.fullmatch(r'v?\d+\.\d+\.\d+', tag):
+    raise SystemExit('Use uma tag semver, como v2.0.6 ou 2.0.6.')
 body = re.sub(r'[*_`]', '', release.get('body') or '')
 match = re.search(r'(?im)^\s*(?:c[oó]digo|versioncode)\s*:\s*(\d+)\s*$', body)
 if match is None:
